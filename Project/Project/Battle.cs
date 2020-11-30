@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -15,56 +15,44 @@ namespace ConsoleApp12
             //public int Round { get; set; } = 1;
             public Battle(Charactor a, Charactor b)
             {
-                if (a.Speed > a.Speed) //a first
+                if (a.Speed > a.Speed || (a.Speed == b.Speed && GenerateRandomNums() > 50))
                 {
-                    skillAttack(a, b);
-                    b.Man -= Damage;
-                    physicalAttack(a.Attack, b.Defend);
-                    b.Man -= Damage;
+                    WhoAttackFirst(a, b); //a first
                 }
 
-                if (a.Speed < b.Speed) //b first
+                if (a.Speed < b.Speed || (a.Speed == b.Speed && GenerateRandomNums() < 50))
                 {
-                    skillAttack(b, a);
-                    a.Man -= Damage;
-                    physicalAttack(b.Attack, a.Defend);
-                    a.Man -= Damage;
-                }
-
-                if (a.Speed == b.Speed && GenerateRandomNums() > 5) //a first
-                {
-                    skillAttack(a, b);
-                    b.Man -= Damage;
-                    physicalAttack(a.Attack, b.Defend);
-                    b.Man -= Damage;
-                }
-
-                if (a.Speed == b.Speed && GenerateRandomNums() < 5) //b first
-                {
-                    skillAttack(b, a);
-                    a.Man -= Damage;
-                    physicalAttack(b.Attack, a.Defend);
-                    a.Man -= Damage;
+                    WhoAttackFirst(b, a);  //b first
                 }
             }
 
-            public int skillAttack(Charactor a, Charactor b)
+
+            public void WhoAttackFirst(Charactor a, Charactor b)
             {
-                Damage = 0;
+                SkillAttack(a, b);
+                b.Man -= Damage;
+                PhysicalAttack(a.Attack, b.Defend);
+                b.Man -= Damage;
+
+                SkillAttack(b, a);
+                a.Man -= Damage;
+                PhysicalAttack(b.Attack, a.Defend);
+                a.Man -= Damage;
+            }
+            public int SkillAttack(Charactor a, Charactor b)
+            {
                 Damage += a.Skill1(a, b);
                 Damage += a.Skill2(a, b);
                 Damage += a.Skill3(a, b);
                 return Damage;
             }
 
-            public int physicalAttack(int attack, int defend)
+            public static int PhysicalAttack(int attack, int defend)
             {
-                Damage = 0;
-                Damage = (attack - defend) * 20;
-                return Damage;
+                int damage = 0;
+                damage = (attack - defend) * 20;
+                return damage;
             }
-
-          
         }
     }
 }
