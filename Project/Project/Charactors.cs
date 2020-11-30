@@ -1,3 +1,4 @@
+using AllSkills;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace ConsoleApp12
         public abstract int Skill1(Charactor a, Charactor b);
         public abstract int Skill2(Charactor a, Charactor b);
         public abstract int Skill3(Charactor a, Charactor b);
+        //public abstract int Skill4(Skills skills)
     }
 
     public class Caocao : Charactor
@@ -72,20 +74,24 @@ namespace ConsoleApp12
     public class ZhaoYun : Charactor
     {
         public ZhaoYun(string name, int attack, int defend, int intelligence, int speed, int man) : base(name, attack, defend, intelligence, speed, man)
-        { }
+        {
+            //Skills.YiShenShiDan();
+
+            Console.WriteLine("赵云发动一身是胆,攻击力提升40");
+            Attack += 40;
+            Console.WriteLine("赵云发动一身是胆,防御力提升40");
+            Defend += 40;
+            Console.WriteLine("赵云发动一身是胆,智力提升40");
+            Intelligence += 40;
+            Console.WriteLine("赵云发动一身是胆,速度提升40");
+            Speed += 40;
+        }
 
         public override int Skill1(Charactor a, Charactor b)
         {
-
-            int lanuch = GenerateRandomNums();
-            if (lanuch < 5)
-            {
-                int damage = Battle.PhysicalAttack(a.Attack, b.Defend);
-                Console.WriteLine(("{0}发动机型军略，{1}由于机型军略的伤害，损失了兵力200", a.Name, b.Name, damage));
-                return damage;
-            }
             return 0;
         }
+
         public override int Skill2(Charactor a, Charactor b)
         {
             int lanuch = GenerateRandomNums();

@@ -114,4 +114,16 @@ namespace ConsoleApp12
             //                               .Select(m => m.mt.Id + "  " + m.mt.Name + "  " + m.mt.Age + "  " + m.mt.Menpai + "  " + m.mt.Kungfu + "  " + m.mt.Level + "  ");
         //}
     }
+
+    //class cicle : shope
+    //{
+    //    public double arca(double r) //这个是重载，无须override
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //    public override double arca() // 无参数函数必须重写
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
 }
