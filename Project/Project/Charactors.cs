@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using static ConsoleApp12.BattleGround;
 using static ConsoleApp12.SanGuo;
 
 namespace ConsoleApp12
@@ -40,8 +41,9 @@ namespace ConsoleApp12
             int lanuch = GenerateRandomNums();
             if (lanuch < 5)
             {
-                Console.WriteLine("{0}发动横扫千军，{1}由于横扫千军的伤害，损失了兵力200", a.Name, b.Name);
-                return 200;
+                int damage = Battle.PhysicalAttack(a.Attack, b.Defend);
+                Console.WriteLine("{0}发动横扫千军，{1}由于横扫千军的伤害，损失了兵力{3}", a.Name, b.Name, damage);
+                return damage;
             }
             return 0;
         }
@@ -74,11 +76,13 @@ namespace ConsoleApp12
 
         public override int Skill1(Charactor a, Charactor b)
         {
+
             int lanuch = GenerateRandomNums();
             if (lanuch < 5)
             {
-                Console.WriteLine("{0}发动机型军略，{1}由于机型军略的伤害，损失了兵力200", a.Name, b.Name);
-                return 200;
+                int damage = Battle.PhysicalAttack(a.Attack, b.Defend);
+                Console.WriteLine(("{0}发动机型军略，{1}由于机型军略的伤害，损失了兵力200", a.Name, b.Name, damage));
+                return damage;
             }
             return 0;
         }
