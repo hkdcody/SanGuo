@@ -19,7 +19,7 @@ namespace ConsoleApp12
         {
             Charactor caoCao = new Caocao("曹操", 137, 233, 226, 117, 10000);
             Charactor zhaoYun = new ZhaoYun("赵云", 280, 212, 132, 157, 10000);
-
+            Console.WriteLine(zhaoYun.Attack);
             Battle BattleGround = new Battle(caoCao, zhaoYun);
             Console.WriteLine(caoCao.Man);
             Console.WriteLine(caoCao.Name);
