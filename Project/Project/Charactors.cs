@@ -8,7 +8,7 @@ using static ConsoleApp12.SanGuo;
 
 namespace ConsoleApp12
 {
-    public abstract class Charactor
+    public abstract class Charactor : Skills
     {
         public Charactor(string name, int attack, int defend, int intelligence, int speed, int man)
         {
@@ -30,6 +30,11 @@ namespace ConsoleApp12
         public abstract int Skill1(Charactor a, Charactor b);
         public abstract int Skill2(Charactor a, Charactor b);
         public abstract int Skill3(Charactor a, Charactor b);
+        public virtual int PhysicalAttack(Charactor a, Charactor b)
+        {
+            int result = (int)Math.Round(((a.Attack - b.Defend) * 1.5 + a.Man / 20) * (1 + GenerateRandomNumsForDamage()));
+            return result;
+        }
         //public abstract int Skill4(Skills skills)
     }
 
@@ -89,19 +94,18 @@ namespace ConsoleApp12
 
         public override int Skill1(Charactor a, Charactor b)
         {
-            return 0;
+            HengSaoQianJun hengSaoQianJun = new HengSaoQianJun();
+            int result = hengSaoQianJun.Damage(a, b);
+            return result;
         }
 
         public override int Skill2(Charactor a, Charactor b)
         {
-            int lanuch = GenerateRandomNums();
-            if (lanuch < 3)
-            {
-                Console.WriteLine("{0}发动八门金锁，{1}由于八门金锁的伤害，损失了兵力400", a.Name, b.Name);
-                return 400;
-            }
-            return 0;
+            PoZhenCuiJian poZhenCuiJian = new PoZhenCuiJian();
+            int result = poZhenCuiJian.Damage(a, b);
+            return result;
         }
+
         public override int Skill3(Charactor a, Charactor b)
         {
             int lanuch = GenerateRandomNums();

@@ -11,12 +11,16 @@ namespace ConsoleApp12
         public static int GenerateRandomNums()
         {
             Random possibility = new Random();
-            int lanuch = possibility.Next(1, 10);
+            int lanuch = possibility.Next(1, 100);
             return lanuch;
         }
 
+       
+
         static void Main(string[] args)
         {
+
+
             Charactor caoCao = new Caocao("曹操", 137, 233, 226, 117, 10000);
             Charactor zhaoYun = new ZhaoYun("赵云", 280, 212, 132, 157, 10000);
             Console.WriteLine(zhaoYun.Attack);
