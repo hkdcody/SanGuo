@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace ConsoleApp12
 {
+    #region
     class MartialArtsMaster
     {
         /// <summary>
@@ -69,49 +70,49 @@ namespace ConsoleApp12
         //        new Kongfu(){KongfuId=3, KongfuName="葵花宝典", Lethality=100}
         //    };
 
-            ////query 写法
-            //var GaiBangMaster = from m in master
-            //                    where m.Level >= 8 && m.Menpai == "丐帮"
-            //                    select m;
-            //foreach (var m in GaiBangMaster)
-            //{
-            //    Console.WriteLine(m.Name);
-            //}
+        ////query 写法
+        //var GaiBangMaster = from m in master
+        //                    where m.Level >= 8 && m.Menpai == "丐帮"
+        //                    select m;
+        //foreach (var m in GaiBangMaster)
+        //{
+        //    Console.WriteLine(m.Name);
+        //}
 
-            ////fluent 写法
-            //GaiBangMaster = master.Where(m => m.Level >= 8 && m.Menpai == "丐帮");
+        ////fluent 写法
+        //GaiBangMaster = master.Where(m => m.Level >= 8 && m.Menpai == "丐帮");
 
-            //foreach (var m in GaiBangMaster)
-            //{
-            //    Console.WriteLine(m.Name);
-            //}
-
-
-            ////过滤武功杀伤大于95 query
-            //var Lethalmaster = from m in master
-            //                   from n in kongfu
-            //                   where n.Lethality >= 95 && m.Kungfu == n.KongfuName
-            //                   orderby m.Level
-            //                   select m;
-            //foreach (var m in Lethalmaster)
-            //{
-            //    Console.WriteLine(m.Name);
-            //}
-
-            //fluent
-            //var Lethalmaster3 = master.Select(m => m.Level >= 8 && m.Menpai == "丐帮");
-            //foreach (var m in Lethalmaster3)
-            //{
-            //    Console.WriteLine(m.ToString());
-            //}
+        //foreach (var m in GaiBangMaster)
+        //{
+        //    Console.WriteLine(m.Name);
+        //}
 
 
-            ////var Lethalmaster3 = master.SelectMany(m=>m.Name).Where(n=>n)
-            ////var Lethalmaster2 = master.SelectMany(m => m.Level >= 8 && m.Menpai == "丐帮");
-            //var masterKongfuMethod = master.SelectMany(k => kongfu, (m, k) => new { mt = m, kf = k })
-            //                               .Where(x => x.kf.Lethality > 90 && x.mt.Kungfu == x.kf.KongfuName)
-            //                               .OrderBy(m => m.mt.Level)
-            //                               .Select(m => m.mt.Id + "  " + m.mt.Name + "  " + m.mt.Age + "  " + m.mt.Menpai + "  " + m.mt.Kungfu + "  " + m.mt.Level + "  ");
+        ////过滤武功杀伤大于95 query
+        //var Lethalmaster = from m in master
+        //                   from n in kongfu
+        //                   where n.Lethality >= 95 && m.Kungfu == n.KongfuName
+        //                   orderby m.Level
+        //                   select m;
+        //foreach (var m in Lethalmaster)
+        //{
+        //    Console.WriteLine(m.Name);
+        //}
+
+        //fluent
+        //var Lethalmaster3 = master.Select(m => m.Level >= 8 && m.Menpai == "丐帮");
+        //foreach (var m in Lethalmaster3)
+        //{
+        //    Console.WriteLine(m.ToString());
+        //}
+
+
+        ////var Lethalmaster3 = master.SelectMany(m=>m.Name).Where(n=>n)
+        ////var Lethalmaster2 = master.SelectMany(m => m.Level >= 8 && m.Menpai == "丐帮");
+        //var masterKongfuMethod = master.SelectMany(k => kongfu, (m, k) => new { mt = m, kf = k })
+        //                               .Where(x => x.kf.Lethality > 90 && x.mt.Kungfu == x.kf.KongfuName)
+        //                               .OrderBy(m => m.mt.Level)
+        //                               .Select(m => m.mt.Id + "  " + m.mt.Name + "  " + m.mt.Age + "  " + m.mt.Menpai + "  " + m.mt.Kungfu + "  " + m.mt.Level + "  ");
         //}
     }
 
@@ -126,4 +127,91 @@ namespace ConsoleApp12
     //        throw new NotImplementedException();
     //    }
     //}
+    #endregion
+    interface IMsg
+    {
+        void Message();
+
+        virtual void ASD() { }
+    }
+
+    //public class MyClass : IMsg
+    //{
+    //    public void Message()
+    //    {          
+    //        Console.WriteLine("MyClass");
+    //    }
+    //}
+    //public class MyClass : IMsg
+    //{
+    //    public virtual void Message()
+    //    {
+    //        Console.WriteLine("MyClass");
+    //    }
+    //}
+
+    //public abstract class MyClass : IMsg
+    //{
+    //    #region IMsg Members
+    //    public abstract void Message();
+    //    #endregion
+
+    //}
+
+    //public class MyDerivedClass : MyClass
+    //{
+    //    public override void Message()
+    //    {
+    //        Console.WriteLine("MyDerivedClass");
+    //    }
+    //}
+    //public class MyDerivedClass : MyClass
+    //{
+    //    public new void Message()
+    //    {
+    //        Console.WriteLine("MyDerivedClass");
+    //    }
+    //}
+
+    //public class MyDerivedClass : MyClass, IMsg
+    //{
+    //    public new void Message()
+    //    {
+    //        Console.WriteLine("MyDerivedClass");
+    //    }
+
+    public abstract class MyClass : IMsg
+    {
+        public void Message()
+        {
+            ShowMessage();
+        }
+
+        protected virtual void ShowMessage()
+        {
+            Console.WriteLine("MyClass");
+        }
+        protected virtual void ShowMessage(int a)
+        {
+            Console.WriteLine("MyClass");
+        }
+
+        protected virtual void ShowMessage(int a, int b )
+        {
+            Console.WriteLine("MyClass");
+        }
+
+       // protected abstract void ShowMessage(int a, int b, int c);
+
+    }
+
+    public class MyDerivedClass : MyClass
+    {
+        protected override void ShowMessage(int a )
+        {
+            Console.WriteLine("MyDerivedClass");
+        }
+    }
 }
+
+

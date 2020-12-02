@@ -31,12 +31,12 @@ namespace ConsoleApp12
             {
                 SkillAttack(a, b);
                 b.Man -= Damage;
-                PhysicalAttack(a.Attack, b.Defend);
+                a.PhysicalAttack(a, b);
                 b.Man -= Damage;
 
                 SkillAttack(b, a);
                 a.Man -= Damage;
-                PhysicalAttack(b.Attack, a.Defend);
+                b.PhysicalAttack(b, a);
                 a.Man -= Damage;
             }
             public int SkillAttack(Charactor a, Charactor b)
