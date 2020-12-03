@@ -8,10 +8,10 @@ namespace ConsoleApp12
 {
     public class SanGuo
     {
-        public static int GenerateRandomNums()
+        public static int GenerateRandomNums(int start , int end)
         {
             Random possibility = new Random();
-            int lanuch = possibility.Next(1, 100);
+            int lanuch = possibility.Next(start, ++end);
             return lanuch;
         }
 
@@ -19,15 +19,11 @@ namespace ConsoleApp12
 
         static void Main(string[] args)
         {
-
-
-            Charactor caoCao = new Caocao("曹操", 137, 233, 226, 117, 10000);
+            RandomGenerator. Generator();
+               Charactor caoCao = new Caocao("曹操", 137, 233, 226, 117, 10000);
             Charactor zhaoYun = new ZhaoYun("赵云", 280, 212, 132, 157, 10000);
-            Console.WriteLine(zhaoYun.Attack);
             Battle BattleGround = new Battle(caoCao, zhaoYun);
-            Console.WriteLine(caoCao.Man);
-            Console.WriteLine(caoCao.Name);
-            Console.WriteLine(zhaoYun.Man);
+
         }
     }
 }

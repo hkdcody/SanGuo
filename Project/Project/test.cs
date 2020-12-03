@@ -212,6 +212,18 @@ namespace ConsoleApp12
             Console.WriteLine("MyDerivedClass");
         }
     }
+
+    public static class RandomGenerator
+    { 
+        public static void Generator()
+        {
+            Random a = new Random();
+            for (int i = 0; i < 100; i++)
+            {
+                Console.WriteLine(a.Next(1, 4));
+            }
+        }
+    }
 }
 
 
