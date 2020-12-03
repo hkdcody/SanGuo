@@ -15,12 +15,12 @@ namespace ConsoleApp12
             //public int Round { get; set; } = 1;
             public Battle(Charactor a, Charactor b)
             {
-                if (a.Speed > a.Speed || (a.Speed == b.Speed && GenerateRandomNums() > 50))
+                if (a.Speed > a.Speed || (a.Speed == b.Speed && GenerateRandomNums(1,100) > 50))
                 {
                     WhoAttackFirst(a, b); //a first
                 }
 
-                if (a.Speed < b.Speed || (a.Speed == b.Speed && GenerateRandomNums() < 50))
+                if (a.Speed < b.Speed || (a.Speed == b.Speed && GenerateRandomNums(1,100) < 50))
                 {
                     WhoAttackFirst(b, a);  //b first
                 }
@@ -42,10 +42,23 @@ namespace ConsoleApp12
             public int SkillAttack(Charactor a, Charactor b)
             {
                 Damage += a.Skill1(a, b);
+                b.WoundMan += (int)(Damage * 0.9);
                 Damage += a.Skill2(a, b);
+                b.WoundMan += (int)(Damage * 0.9);
                 Damage += a.Skill3(a, b);
+                b.WoundMan += (int)(Damage * 0.9);
                 return Damage;
             }
+
+
+
+
+
+
+
+
+
+
 
             public static int PhysicalAttack(int attack, int defend)
             {
