@@ -12,59 +12,65 @@ namespace ConsoleApp12
         {
             public int Damage { get; set; }
 
+            public static int Round { get; set; } = 1;
+
             //public int Round { get; set; } = 1;
             public Battle(Charactor a, Charactor b)
             {
-                if (a.Speed > a.Speed || (a.Speed == b.Speed && GenerateRandomNums(1,100) > 50))
+                while (Round <= 8)
                 {
-                    WhoAttackFirst(a, b); //a first
-                }
+                    Console.WriteLine("第{0}回合:", Round);
+                    if (a.Speed > a.Speed || (a.Speed == b.Speed && GenerateRandomNums(1, 100) > 50))
+                    {
+                        Console.WriteLine("{0}先攻!",a.Name);
+                        Attack(a, b); //a first
+                        Attack(b, a); 
+                    }
 
-                if (a.Speed < b.Speed || (a.Speed == b.Speed && GenerateRandomNums(1,100) < 50))
-                {
-                    WhoAttackFirst(b, a);  //b first
+                    if (a.Speed < b.Speed || (a.Speed == b.Speed && GenerateRandomNums(1, 100) < 50))
+                    {
+                        Console.WriteLine("{0}先攻!", b.Name);
+                        Attack(b, a);  //b first
+                        Attack(a, b);
+                    }
+
+                    int deadMan = a.WoundMan - (int)(a.WoundMan * 0.9);
+                    a.WoundMan = (int)(a.WoundMan * 0.9);                    
+                    Console.WriteLine("{0}本回合伤兵数{1},死亡{2}", a.Name, a.WoundMan, deadMan);
+
+                    deadMan = b.WoundMan - (int)(b.WoundMan * 0.9);
+                    b.WoundMan = (int)(b.WoundMan * 0.9);
+                    Console.WriteLine("{0}本回合伤兵数{1},死亡{2}", b.Name, b.WoundMan, deadMan);
+                    Round++;
                 }
             }
 
 
-            public void WhoAttackFirst(Charactor a, Charactor b)
+            public void Attack(Charactor a, Charactor b)
             {
-                SkillAttack(a, b);
-                b.Man -= Damage;
-                a.PhysicalAttack(a, b);
-                b.Man -= Damage;
+                b.WoundMan = SkillAttack(a, b);
 
-                SkillAttack(b, a);
-                a.Man -= Damage;
-                b.PhysicalAttack(b, a);
-                a.Man -= Damage;
+                b.WoundMan += a.PhysicalAttack(a, b);
             }
             public int SkillAttack(Charactor a, Charactor b)
             {
-                Damage += a.Skill1(a, b);
-                b.WoundMan += (int)(Damage * 0.9);
+                Damage = a.Skill1(a, b);
+                b.WoundMan += Damage;
                 Damage += a.Skill2(a, b);
-                b.WoundMan += (int)(Damage * 0.9);
+                b.WoundMan = Damage;
                 Damage += a.Skill3(a, b);
-                b.WoundMan += (int)(Damage * 0.9);
+                b.WoundMan = Damage;
                 return Damage;
             }
 
 
 
 
-
-
-
-
-
-
-
-            public static int PhysicalAttack(int attack, int defend)
+            public int PhysicalAttack(Charactor a, Charactor b)
             {
-                int damage = 0;
-                damage = (attack - defend) * 20;
-                return damage;
+                Damage = (a.Attack - b.Defend) * 20;
+                b.WoundMan += Damage;
+                return Damage;
             }
         }
     }

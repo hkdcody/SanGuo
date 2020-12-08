@@ -14,19 +14,20 @@ namespace AllSkills
             public override int DamageCalculator(Charactor A, Charactor B)
             {
                 //double deviation = GenerateRandomNumsForDamage();
-                int result = (int)Math.Round(((A.Attack - B.Defend) * 1.5 + A.Man / 20) * GenerateRandomNumsForDamage());
+                int differences = A.Attack - B.Defend > 0 ? A.Attack - B.Defend : 0;
+                int result = (int)Math.Round((differences * 1.5 + A.Man / 20) * GenerateRandomNumsForDamage());
                 return result;
             }
             //readonly People peoplenumber = People.OnePeople;
             public override int Damage(Charactor A, Charactor B)
             {
-                if (SkillLanuch(40) == true)
-                {
-                    int damage = DamageCalculator(A, B);
-                    Console.WriteLine("{0}发动横扫千军,{1}受到{2}点伤害 ({3})", A.Name, B.Name, damage, B.Man -= damage);
-                    return damage;
-                }
-                return 0;
+                //if (SkillLanuch(40) == true)
+                //{
+                int damage = DamageCalculator(A, B);
+                Console.WriteLine("{0}发动横扫千军,{1}受到{2}点伤害 ({3})", A.Name, B.Name, damage, B.Man -= damage);
+                return damage;
+                //}
+                //return 0;
             }
 
         }
@@ -35,21 +36,22 @@ namespace AllSkills
         {
             public override int DamageCalculator(Charactor A, Charactor B)
             {
-                B.Defend -= 80 > 0 ? B.Defend : 0;
+                B.Defend = B.Defend - 80 > 0 ? B.Defend - 80 : 0;
+                int differences = A.Attack - B.Defend > 0 ? A.Attack - B.Defend : 0;
                 //double deviation = GenerateRandomNumsForDamage();
-                int result = (int)Math.Round(((A.Attack - B.Defend) * 1.5 + A.Man / 20) * 1.58 * GenerateRandomNumsForDamage());
+                int result = (int)Math.Round((differences * 1.5 + A.Man / 20) * 1.58 * GenerateRandomNumsForDamage());
                 return result;
             }
             //readonly People peoplenumber = People.OnePeople;
             public override int Damage(Charactor A, Charactor B)
             {
-                if (SkillLanuch(35) == true)
-                {
-                    int damage = DamageCalculator(A, B);
-                    Console.WriteLine("{0}发动破阵催坚,{1}受到{2}点伤害 ({3})", A.Name, B.Name, damage, B.Man -= damage);
-                    return damage;
-                }
-                return 0;
+                //if (SkillLanuch(35) == true)
+                //{
+                int damage = DamageCalculator(A, B);
+                Console.WriteLine("{0}发动破阵催坚,{1}受到{2}点伤害 ({3})", A.Name, B.Name, damage, B.Man -= damage);
+                return damage;
+                //}
+                //return 0;
             }
         }
 
@@ -57,19 +59,26 @@ namespace AllSkills
         {
             public override int DamageCalculator(Charactor A, Charactor B)
             {
-                int result = (int)Math.Round(((A.Attack - B.Defend) * 1.5 + A.Man / 20) * 0.84 * GenerateRandomNumsForDamage());
+                int differences = A.Attack - B.Defend > 0 ? A.Attack - B.Defend : 0;
+                int result = (int)Math.Round((differences * 1.5 + A.Man / 20) * 0.84 * GenerateRandomNumsForDamage());
                 return result;
             }
             public override int Damage(Charactor A, Charactor B)
             {
 
-                if (SkillLanuch(40) == true)
+                //if (SkillLanuch(40) == true)
+                //{
+                int damage = 0;
+                int lanuchTime = GenerateRandomNums(1, 4);
+                for (int i = 0; i <= lanuchTime; i++)
                 {
-                    int damage = DamageCalculator(A, B);
+                    damage += DamageCalculator(A, B);
                     Console.WriteLine("{0}发动轻勇飞燕,{1}受到{2}点伤害 ({3})", A.Name, B.Name, damage, B.Man -= damage);
-                    return damage;
                 }
-                return 0;
+                               
+                return damage;
+                //}
+                //return 0;
             }
 
         }

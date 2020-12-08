@@ -11,7 +11,7 @@ namespace ConsoleApp12
         public static int GenerateRandomNums(int start , int end)
         {
             Random possibility = new Random();
-            int lanuch = possibility.Next(start, ++end);
+            int lanuch = possibility.Next(start, ++end); //both start and end will be include in this method
             return lanuch;
         }
 
@@ -19,8 +19,7 @@ namespace ConsoleApp12
 
         static void Main(string[] args)
         {
-            RandomGenerator. Generator();
-               Charactor caoCao = new Caocao("曹操", 137, 233, 226, 117, 10000);
+            Charactor caoCao = new Caocao("曹操", 137, 233, 226, 117, 10000);
             Charactor zhaoYun = new ZhaoYun("赵云", 280, 212, 132, 157, 10000);
             Battle BattleGround = new Battle(caoCao, zhaoYun);
 
