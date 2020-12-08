@@ -27,7 +27,7 @@ namespace ConsoleApp12
         private int intelligence;
         private int speed;
         private int man;
-        private int woundman;
+        private int woundman = 0;
 
         public string Name { get; set; }
         public int Attack { get; set; }
@@ -35,17 +35,22 @@ namespace ConsoleApp12
         public int Intelligence { get; set; }
         public int Speed { get; set; }
         public int Man { get; set; } = 10000;
+
         public int WoundMan
         {
-            get { return WoundMan; }
-            set{ _ = value > 0 ? value : 0; }
-        }     
-        public abstract int Skill1(Charactor a, Charactor b);
+            get { return woundman; }
+            set
+            {
+                woundman = value > 0 ? value : 0;
+            }
+        }
+        public abstract int Skill1(Charactor a, Charactor b); //SkillType skillType);
         public abstract int Skill2(Charactor a, Charactor b);
         public abstract int Skill3(Charactor a, Charactor b);
         public virtual int PhysicalAttack(Charactor a, Charactor b)
         {
-            int result = (int)Math.Round(((a.Attack - b.Defend) * 1.5 + a.Man / 20) * (1 + GenerateRandomNumsForDamage()));
+            int result = (int)Math.Round(((a.Attack - b.Defend) * 1.2 + a.Man / 20) * GenerateRandomNumsForDamage());
+            Console.WriteLine("{0}发动普通攻击,{1}受到{2}点伤害 ({3})", a.Name, b.Name, result, b.Man -= result);
             return result;
         }
         //public abstract int Skill4(Skills skills)
@@ -91,8 +96,9 @@ namespace ConsoleApp12
 
         }
 
-        public override int Skill1(Charactor a, Charactor b)
+        public override int Skill1(Charactor a, Charactor b)//SkillType skillType)
         {
+            //SkillType.Negative
             a.Attack += 40;
             Console.WriteLine("赵云发动一身是胆,攻击力提升40 ({0})", Attack);
             a.Defend += 40;
@@ -115,5 +121,15 @@ namespace ConsoleApp12
             return hengSaoQianJun.Damage(a, b);
         }
 
+    }
+
+    public enum SkillType
+    {
+        Positive,
+        Negative,
+        Strike,
+        Command,
+        Arms,
+        Formation,
     }
 }
